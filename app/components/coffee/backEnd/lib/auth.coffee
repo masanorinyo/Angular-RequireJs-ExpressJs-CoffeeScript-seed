@@ -1,4 +1,2 @@
-(->
-  console.log 'yaysss testing testing'
-  return
-).call this
+console.log 'yaysss testing test'
+  

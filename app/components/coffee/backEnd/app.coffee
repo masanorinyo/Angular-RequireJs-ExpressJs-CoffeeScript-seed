@@ -25,15 +25,13 @@ if 'development' is app.get('env')
   grunt = cp.spawn('grunt', [
     '--force'
     'default'
-    'watch'
   ])
   grunt.stdout.on 'data', (data) ->
     
     #relay output to console
     console.log '%s', data
-    return
+    
 
 app.get '/', routes.index
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get('port')
-  return

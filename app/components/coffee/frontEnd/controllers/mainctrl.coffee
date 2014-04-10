@@ -1,8 +1,6 @@
-(->
-  define [], ->
-    ($scope) ->
-      $scope.hello = 'hello'
-      $scope.$apply()
+define [], ()->
+	($scope)->
+		$scope.hello = "hello"
+		$scope.$apply()
 
-  return
-).call this
+

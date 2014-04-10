@@ -1,6 +1,4 @@
 (function() {
-  (function() {
-    console.log('yaysss testing testing');
-  }).call(this);
+  console.log('yaysss testing test');
 
 }).call(this);

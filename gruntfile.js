@@ -5,7 +5,9 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-protractor-runner');
 	grunt.loadNpmTasks('grunt-karma');
+
 
 	grunt.initConfig({
 		
@@ -27,6 +29,7 @@ module.exports = function(grunt){
 					src: ['{,*/}*.coffee'],
 					dest: 'app/public/js',
 					rename: function(dest, src) {
+
 						return dest + '/' + src.replace(/\.coffee$/, '.js');
 					}
 				}]
@@ -36,7 +39,7 @@ module.exports = function(grunt){
 				files: [{
 					expand: true,
 					cwd: 'app/components/coffee/backEnd',
-					src: ['**/{,*/}*.coffee'],
+					src: ['{,*/}{,*/}*.coffee'],
 					dest: 'app',
 					rename: function(dest, src) {
 						return dest + '/' + src.replace(/\.coffee$/, '.js');
@@ -90,23 +93,41 @@ module.exports = function(grunt){
 		// watch any changes in files
 		watch:{
 			
-			options:{livereload:true},
+			options:{
+				livereload:true
+			},
 			
 			coffeescript:{
 				
 				files:[
 					
-					'app/components/coffee/**/{,*/}*.coffee',//for frontEnd
-					'app/components/coffee/**/{,*/}{,*/}*.coffee'// for backEnd
+					//for frontEnd
+					'app/components/coffee/frontEnd/{,*/}*.coffee',
+					
+					
 				
 				],
 
 				tasks:[
 					
-					'coffee:frontDest',
-					'coffee:backDest'
+					'coffee:frontDest'
 				]
 				
+			},
+
+			scripts:{
+				files:[
+				
+					// for backEnd
+					'app/components/coffee/backEnd/{,*/}{,*/}*.coffee'
+
+				],
+
+				tasks:[
+
+					'coffee:backDest'
+
+				]
 			},
 
 			sass:{

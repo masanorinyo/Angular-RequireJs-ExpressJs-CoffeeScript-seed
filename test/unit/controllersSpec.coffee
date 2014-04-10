@@ -9,6 +9,7 @@ define(
 
 	(angular,mocks,app,ctrl)->
 		describe 'MainCtrl', ->
+			
 			$scope = null
 			mainCtrl = null
 			

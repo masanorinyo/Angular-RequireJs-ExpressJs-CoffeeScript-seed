@@ -1,8 +1,8 @@
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 5000,
 
   specs: [
-    'e2e/*Spec.js'
+    'e2e/**/*Spec.js'
   ],
 
   capabilities: {
@@ -13,7 +13,4 @@ exports.config = {
 
   framework: 'jasmine',
 
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: 30000
-  }
 };
