@@ -1,0 +1,32 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node-dev app/app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*",
+    "karma": "*",
+    "coffee-script": "*",
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "ngmin": "~0.5.0",
+    "grunt": "~0.4.4",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-compass": "~0.7.2",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-requirejs": "~0.4.3",
+    "karma-requirejs": "*",
+    "karma-jasmine": "*",
+    "karma-chrome-launcher": "~0.1.3",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-opera-launcher": "~0.1.0",
+    "karma-safari-launcher": "~0.1.1",
+    "karma-coffee-preprocessor": "~0.2.1",
+    "grunt-karma": "~0.8.2"
+  }
+}
