@@ -1,2 +1,2 @@
-Angular-RequireJs-Express-CoffeeScript-Karma-boilerplate
+Angular-RequireJs-Express-CoffeeScript-Karma-seed
 ========================================================
