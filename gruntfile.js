@@ -9,10 +9,49 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-coffeelint');
 	grunt.loadNpmTasks('grunt-notify');
+	grunt.loadNpmTasks("grunt-modernizr");
 
 
 	grunt.initConfig({
-		
+		modernizr: {
+
+			dist: {
+				
+				"devFile" : "app/public/js/misc/modernizr-dev.js",
+				
+				"outputFile" : "app/public/js/misc//modernizr-built.js",
+
+				"extra" : {
+				"shiv" : true,
+				"printshiv" : false,
+				"load" : true,
+				"mq" : false,
+				"cssclasses" : true
+				},
+
+				"extensibility" : {
+				"addtest" : false,
+				"prefixed" : false,
+				"teststyles" : false,
+				"testprops" : false,
+				"testallprops" : false,
+				"hasevents" : false,
+				"prefixes" : false,
+				"domprefixes" : false
+				},
+
+				 // "tests" : [
+				 // 	'opacity'
+				 // ],
+
+				"parseFiles" : true,
+
+				"matchCommunityTests" : false,
+
+				"uglify" : true
+			}
+
+		},
 
 		coffeelint: {
 		
@@ -198,7 +237,10 @@ module.exports = function(grunt){
 	})
 	
 	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('test', ['karma:unit','protractor']);
 	grunt.registerTask('test:unit', ['karma:unit']);
 	grunt.registerTask('test:e2e', ['protractor']);
-    grunt.registerTask('build', ['requirejs:compile']);
+	grunt.registerTask('build', ['requirejs:compile','modernizr']);
+    grunt.registerTask('build:require', ['requirejs:compile']);
+    grunt.registerTask('build:modernizr', ['modernizr']);
 }
