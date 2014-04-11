@@ -34,7 +34,7 @@
   if ('development' === app.get('env')) {
     app.use(express.errorHandler());
     cp = require('child_process');
-    grunt = cp.spawn('grunt', ['--force', 'default']);
+    grunt = cp.spawn('grunt', ['--force', 'default', 'watch']);
     grunt.stdout.on('data', function(data) {
       return console.log('%s', data);
     });

@@ -25,6 +25,7 @@ if 'development' is app.get('env')
   grunt = cp.spawn('grunt', [
     '--force'
     'default'
+    'watch'
   ])
   grunt.stdout.on 'data', (data) ->
     

@@ -7,10 +7,22 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-protractor-runner');
 	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-coffeelint');
+	grunt.loadNpmTasks('grunt-notify');
 
 
 	grunt.initConfig({
 		
+
+		coffeelint: {
+		
+			app: [
+				'app/components/coffee/**/{,*/}*.coffee'
+			]
+		
+		},
+		
+
 		compass:{
 			dev:{
 				options:{
@@ -47,6 +59,23 @@ module.exports = function(grunt){
 				}]
 			}
 		},
+
+		protractor: {
+			options: {
+				configFile: "test/protractor.conf.js", // Default config file
+				keepAlive: true, // If false, the grunt process stops when the test fails.
+				noColor: false, // If true, protractor will not use colors in its output.
+			},
+			run:{}
+		    
+		},
+
+		karma: {
+			unit: {
+				configFile: 'test/karma.conf.js'
+			}
+		},
+
 
 		//require js optimizer
 		requirejs : {
@@ -90,12 +119,11 @@ module.exports = function(grunt){
            }
         },
 
+        
+
 		// watch any changes in files
 		watch:{
 			
-			options:{
-				livereload:true
-			},
 			
 			coffeescript:{
 				
@@ -110,8 +138,14 @@ module.exports = function(grunt){
 
 				tasks:[
 					
-					'coffee:frontDest'
-				]
+					'coffee:frontDest',
+					'coffeelint'
+					
+				],
+
+				options:{
+					livereload:true
+				}
 				
 			},
 
@@ -125,14 +159,35 @@ module.exports = function(grunt){
 
 				tasks:[
 
-					'coffee:backDest'
+					'coffee:backDest',
+					'coffeelint'
+					
+				],
 
-				]
+				options:{
+					livereload:true
+				}
+			},
+
+			e2eTest:{
+				
+				files: [
+					
+					'app/public/js/{,*/}*.js',
+					'app/components/coffee/**/{,*/}*.coffee'
+				
+				],
+
+				tasks: ['protractor:run']    // The tasks to run when watched files changed
+				
 			},
 
 			sass:{
 				files:['app/components/sass/*.scss'],
-				tasks:['compass:dev']
+				tasks:['compass:dev'],
+				options:{
+					livereload:true
+				}
 			},
 
 			html:{
@@ -140,12 +195,16 @@ module.exports = function(grunt){
 					"app/views/*.jade",
 					"app/views/**/*.jade",
 					"app/public/partials/{,*/}*.html"
-				]
+				],
+				options:{
+					livereload:true
+				}
 			}
 		}
 	})
 
 	grunt.registerTask('default', ['watch']);
-
+	grunt.registerTask('test:unit', ['karma:unit']);
+	grunt.registerTask('test:e2e', ['protractor']);
     grunt.registerTask('build', ['requirejs:compile']);
 }
