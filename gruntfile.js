@@ -115,6 +115,21 @@ module.exports = function(grunt){
 			}
 		},
 
+		uglify:{
+		
+			files: {
+			
+				expand: true,
+				cwd: 'app/public/js/misc',
+				src: 'modernizr-test.js',
+				dest: 'app/public/js/misc',
+				rename: function(dest, src) {
+					return dest + '/' + src.replace(/\.js$/, '.min.js');
+				}
+
+			}
+		},
+
 
 		//require js optimizer
 		requirejs : {
@@ -240,7 +255,10 @@ module.exports = function(grunt){
 	grunt.registerTask('test', ['karma:unit','protractor']);
 	grunt.registerTask('test:unit', ['karma:unit']);
 	grunt.registerTask('test:e2e', ['protractor']);
-	grunt.registerTask('build', ['requirejs:compile','modernizr']);
+	grunt.registerTask('build', ['requirejs:compile','modernizr','uglify']);
     grunt.registerTask('build:require', ['requirejs:compile']);
     grunt.registerTask('build:modernizr', ['modernizr']);
+    grunt.registerTask('build:uglify', ['uglify']);
+
+
 }
