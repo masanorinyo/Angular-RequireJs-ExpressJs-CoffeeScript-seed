@@ -14,7 +14,7 @@ app.use express.json()
 app.use express.urlencoded()
 app.use express.methodOverride()
 app.use app.router
-app.use express.static(path.join(__dirname, 'public'))
+app.use express.static(path.join(__dirname, '../public'))
 
 # development only
 if 'development' is app.get('env')
@@ -34,5 +34,8 @@ if 'development' is app.get('env')
     
 
 app.get '/', routes.index
+
+
+
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get('port')

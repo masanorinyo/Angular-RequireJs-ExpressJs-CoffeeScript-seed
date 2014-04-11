@@ -37,7 +37,7 @@ module.exports = function(grunt){
 			frontDest: {
 				files: [{
 					expand: true,
-					cwd: 'app/components/coffee/frontEnd',
+					cwd: 'app/components/coffee/public',
 					src: ['{,*/}*.coffee'],
 					dest: 'app/public/js',
 					rename: function(dest, src) {
@@ -50,9 +50,9 @@ module.exports = function(grunt){
 			backDest:{
 				files: [{
 					expand: true,
-					cwd: 'app/components/coffee/backEnd',
+					cwd: 'app/components/coffee/server',
 					src: ['{,*/}{,*/}*.coffee'],
-					dest: 'app',
+					dest: 'app/server',
 					rename: function(dest, src) {
 						return dest + '/' + src.replace(/\.coffee$/, '.js');
 					}
@@ -119,18 +119,20 @@ module.exports = function(grunt){
            }
         },
 
-        
-
 		// watch any changes in files
 		watch:{
 			
 			
+			options:{
+				livereload:true
+			},
+
 			coffeescript:{
 				
 				files:[
 					
-					//for frontEnd
-					'app/components/coffee/frontEnd/{,*/}*.coffee',
+					//for public
+					'app/components/coffee/public/{,*/}*.coffee',
 					
 					
 				
@@ -139,34 +141,28 @@ module.exports = function(grunt){
 				tasks:[
 					
 					'coffee:frontDest',
-					'coffeelint'
+					//'coffeelint'
 					
 				],
 
-				options:{
-					livereload:true
-				}
 				
 			},
 
 			scripts:{
 				files:[
 				
-					// for backEnd
-					'app/components/coffee/backEnd/{,*/}{,*/}*.coffee'
+					// for server
+					'app/components/coffee/server/{,*/}{,*/}*.coffee'
 
 				],
 
 				tasks:[
 
 					'coffee:backDest',
-					'coffeelint'
+					//'coffeelint'
 					
 				],
 
-				options:{
-					livereload:true
-				}
 			},
 
 			e2eTest:{
@@ -174,7 +170,7 @@ module.exports = function(grunt){
 				files: [
 					
 					'app/public/js/{,*/}*.js',
-					'app/components/coffee/**/{,*/}*.coffee'
+					'app/components/coffee/public/{,*/}*.coffee'
 				
 				],
 
@@ -183,26 +179,24 @@ module.exports = function(grunt){
 			},
 
 			sass:{
+				
 				files:['app/components/sass/*.scss'],
 				tasks:['compass:dev'],
-				options:{
-					livereload:true
-				}
+				
 			},
 
 			html:{
+				
 				files:[
 					"app/views/*.jade",
 					"app/views/**/*.jade",
 					"app/public/partials/{,*/}*.html"
-				],
-				options:{
-					livereload:true
-				}
+				]
+				
 			}
 		}
 	})
-
+	
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('test:unit', ['karma:unit']);
 	grunt.registerTask('test:e2e', ['protractor']);
