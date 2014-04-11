@@ -10,6 +10,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-coffeelint');
 	grunt.loadNpmTasks('grunt-notify');
 	grunt.loadNpmTasks("grunt-modernizr");
+	grunt.loadNpmTasks('grunt-newer');
 
 
 	grunt.initConfig({
@@ -194,7 +195,7 @@ module.exports = function(grunt){
 
 				tasks:[
 					
-					'coffee:frontDest',
+					'newer:coffee:frontDest',
 					//'coffeelint'
 					
 				],
@@ -212,7 +213,7 @@ module.exports = function(grunt){
 
 				tasks:[
 
-					'coffee:backDest',
+					'newer:coffee:backDest',
 					//'coffeelint'
 					
 				],
@@ -235,7 +236,7 @@ module.exports = function(grunt){
 			sass:{
 				
 				files:['app/components/sass/*.scss'],
-				tasks:['compass:dev'],
+				tasks:['newer:compass:dev'],
 				
 			},
 
